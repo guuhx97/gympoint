@@ -15,6 +15,7 @@ class Student extends Model {
         tableName: 'students',
       }
     );
+    return this;
   }
 }
 
