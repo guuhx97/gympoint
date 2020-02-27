@@ -2,6 +2,9 @@ import * as Yup from 'yup';
 import HelperOrder from '../models/HelperOrder';
 import Student from '../models/Student';
 
+import AnswerMail from '../jobs/AnswerMail';
+import Queue from '../../lib/Queue';
+
 class HelperOrderController {
   async show(req, res) {
     /**
@@ -108,32 +111,35 @@ class HelperOrderController {
       return res.status(400).json({ error: 'Validation body is fail' });
     }
 
-    const { answer } = req.body;
     /**
      * Check Helper Orders exist
      */
-    const helperOrder = await HelperOrder.findOne({
-      where: {
-        id: req.params.helper_id,
-      },
-      include: [
-        {
-          model: Student,
-          as: 'student',
-          attributes: ['name'],
-        },
-      ],
-    });
+    const helperOrder = await HelperOrder.findByPk(req.params.helper_id);
     if (!helperOrder) {
       return res.status(400).json({ error: 'Helper Order does not exist' });
     }
 
-    const { id, student_id, question, answer_at } = await helperOrder.update({
+    const {
+      id,
+      student_id,
+      question,
       answer,
+      answer_at,
+    } = await helperOrder.update({
+      answer: req.body.answer,
       answer_at: new Date(),
     });
 
+    const student = await Student.findByPk(student_id);
+
     // ENVIAR EMAILS
+
+    await Queue.add(AnswerMail.key, {
+      question,
+      answer,
+      answer_at,
+      student,
+    });
 
     return res.json({ id, student_id, question, answer, answer_at });
   }
