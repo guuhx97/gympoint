@@ -5,6 +5,9 @@ import Plan from '../models/Plan';
 import Enrollment from '../models/Enrollment';
 import Student from '../models/Student';
 
+import DetailMail from '../jobs/DetailMail';
+import Queue from '../../lib/Queue';
+
 class EnrollmentController {
   async index(req, res) {
     const enrollment = await Enrollment.findAll({
@@ -104,7 +107,11 @@ class EnrollmentController {
       ],
     });
 
-    // ENVIA EMAIL
+    await Queue.add(DetailMail.key, {
+      plan,
+      student,
+      enrollment,
+    });
 
     return res.json(createdEnrollment);
   }
