@@ -9,8 +9,8 @@
 
 ## 👨🏼‍💻 Projeto
 
-Gympoint is an application that aims to perform gym management. It was the challenge of class 9 of the bootcamp given by Rocketseat. At the time of developing this application, it is no longer a final bootcamp challenge.
+GymPoint is an application for gym management. It can be used by both students and academy staff. It was the challenge of class 9 of the bootcamp given by Rocketseat. The application is being developed after the GoStack 9.0 challenge delivery period.
 
 ## 📝 Licença
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+This project is under the MIT license. See the file [LICENSE](LICENSE) for more details.
