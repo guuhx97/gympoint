@@ -1,14 +1,16 @@
 <h1 align="center">
-  <img alt="Gympoint" title="Gympoint" src="../.github/logo.png" width="50%" />
+  <img alt="Gympoint" title="Gympoint" src="../.github/logo.png" width="200px" />
 </h1>
-<center>
+
 
 <h4 align="center">
   Final Challenge Bootcamp 9.0 by Rocketseat
 </h4>
 
-# :memo: Menu
 
+<center>
+
+# :memo: Menu
 
 [Part One](Challenge01/)
 
